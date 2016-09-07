@@ -1,0 +1,6 @@
+##
+# {{ ansible_managed }}
+
+{% for option, value in mosquitto.settings.iteritems() %}
+{{ option }} {{ value }}
+{% endfor %}
