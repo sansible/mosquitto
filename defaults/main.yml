@@ -1,0 +1,13 @@
+---
+
+mosquitto:
+  install_clients: no
+  version: 1.4.*
+  aws:
+    enabled: no
+    region: eu-west-1
+    s3_files: [ ]
+  settings:
+    allow_anonymous: "true"
+    persistence: "true"
+  user_list: {}

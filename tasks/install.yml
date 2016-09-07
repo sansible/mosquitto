@@ -1,0 +1,35 @@
+---
+
+- name: Add Mosquitto repository
+  become: yes
+  apt_repository:
+    repo: ppa:mosquitto-dev/mosquitto-ppa
+    state: present
+    update_cache: yes
+    validate_certs: no
+
+- name: Ensure Mosquitto service is installed
+  become: yes
+  apt:
+    name: "mosquitto={{ mosquitto.version }}"
+    state: present
+
+- name: Ensure Mosquitto clients
+  become: yes
+  apt:
+    name: "mosquitto-clients={{ mosquitto.version }}"
+    state: present
+  when: mosquitto.install_clients
+
+- name: Install Pip for boto
+  become: yes
+  apt:
+    name: python-pip
+  when: mosquitto.aws.enabled
+
+- name: Install boto
+  become: yes
+  pip:
+    name: boto
+  when: mosquitto.aws.enabled
+
