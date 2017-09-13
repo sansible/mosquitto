@@ -6,7 +6,7 @@ galaxy_info:
   author: "David Reed"
   description: "Install Mosquitto."
   license: MIT
-  min_ansible_version: 1.9
+  min_ansible_version: 2.0
   platforms:
     - name: Ubuntu
       versions:
