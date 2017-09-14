@@ -7,6 +7,9 @@ mosquitto:
     enabled: no
     region: eu-west-1
     s3_files: [ ]
+  limits:
+    nofile_soft: 65535
+    nofile_hard: 65535
   settings:
     allow_anonymous: "true"
     persistence: "true"
