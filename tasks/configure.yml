@@ -2,7 +2,7 @@
 
 - name: Download files from S3
   become: yes
-  s3:
+  aws_s3:
     bucket: "{{ item.bucket }}"
     dest: "{{ item.dest }}"
     mode: get
@@ -10,7 +10,7 @@
     region: "{{ sansible_mosquitto_aws_region }}"
   with_items: "{{ sansible_mosquitto_aws_s3_files }}"
   when:
-    - sansible_mosquitto_aws_enabled
+    - sansible_mosquitto_aws_enabled | bool
     - sansible_mosquitto_aws_s3_files | length > 0
 
 - name: Secure downloaded S3 files
@@ -20,7 +20,7 @@
     path: "{{ item.dest }}"
   with_items: "{{ sansible_mosquitto_aws_s3_files }}"
   when:
-    - sansible_mosquitto_aws_enabled
+    - sansible_mosquitto_aws_enabled | bool
     - sansible_mosquitto_aws_s3_files | length > 0
 
 - name: Setup password file
