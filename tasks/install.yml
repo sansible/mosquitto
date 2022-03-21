@@ -7,6 +7,8 @@
     state: present
     update_cache: yes
     validate_certs: no
+  when:
+    - sansible_mosquitto_repoinstall_enabled | bool
 
 - name: Ensure Mosquitto service is installed
   become: yes

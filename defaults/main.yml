@@ -3,6 +3,7 @@
 sansible_mosquitto_aws_enabled: no
 sansible_mosquitto_aws_region: eu-west-1
 sansible_mosquitto_aws_s3_files: []
+sansible_mosquitto_repoinstall_enabled: yes
 sansible_mosquitto_install_clients: no
 sansible_mosquitto_limits_nofile_hard: 65535
 sansible_mosquitto_limits_nofile_soft: 65535
