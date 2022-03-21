@@ -1,5 +1,5 @@
 ---
-
+sansible_mosquitto_conf_destination: "/etc/mosquitto/conf.d/mosquitto.local.conf"
 sansible_mosquitto_aws_enabled: no
 sansible_mosquitto_aws_region: eu-west-1
 sansible_mosquitto_aws_s3_files: []
