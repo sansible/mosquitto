@@ -8,7 +8,7 @@ Develop: [![Build Status](https://travis-ci.org/sansible/mosquitto.svg?branch=de
 * [Settings](#settings)
 * [Examples](#examples)
 
-This roles installs Oracle, tested on Mosquitto 1.4.x.
+This roles installs Oracle, tested on Mosquitto 1.6.x.
 
 
 ## Installation and Dependencies
@@ -20,7 +20,7 @@ To install run `ansible-galaxy install sansible.mosquitto` or add this to your
 
 ```YAML
 - name: sansible.mosquitto
-  version: v2.0
+  version: v3.0
 ```
 
 and run `ansible-galaxy install -p ./roles -r roles.yml`
@@ -39,7 +39,7 @@ This role uses two tags: **build** and **configure**
 ```YAML
 # Whether to install mosquitto_pub and _sub cmds
 sansible_mosquitto_install_clients: no
-sansible_mosquitto_version: 1.4.*
+sansible_mosquitto_version: 1.6.*
 sansible_mosquitto_aws_enabled: yes
 sansible_mosquitto_aws_region: eu-west-1
 # List of files that need to be copied and secured from S3

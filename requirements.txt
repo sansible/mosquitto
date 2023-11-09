@@ -1,2 +1,2 @@
-docker-py
-molecule
+docker==4.2.0
+molecule==2.22.0

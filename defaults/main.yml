@@ -11,4 +11,4 @@ sansible_mosquitto_settings:
   allow_anonymous: yes
   persistence: yes
 sansible_mosquitto_user_list: {}
-sansible_mosquitto_version: 1.4.*
+sansible_mosquitto_version: 1.6.*

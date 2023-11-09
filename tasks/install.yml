@@ -44,13 +44,34 @@
   notify:
     - restart mosquitto
 
-- name: Add ulimits to Sysvinit config
+- name: Locate Mosquitto SystemdD conf
+  shell: |
+    set -o pipefail
+    dpkg -L mosquitto | grep mosquitto.service
+  args:
+    executable: /bin/bash
+  register: sansible_mosquitto_systemd_conf_file_location
+  changed_when: no
+  when: ansible_service_mgr == 'systemd'
+
+- name: Add Mosquitto SystemD settings
   become: yes
-  lineinfile:
-    insertafter: "^umask"
-    line: "ulimit -Hn {{ sansible_mosquitto_limits_nofile_hard }} && ulimit -Sn {{ sansible_mosquitto_limits_nofile_soft }}"
-    dest: /etc/init.d/mosquitto
-    regexp: '^ulimit'
-  when: ansible_service_mgr == 'sysvinit'
-  notify:
-    - restart mosquitto
+  ini_file:
+    option: "{{ item.key }}"
+    path: "{{ sansible_mosquitto_systemd_conf_file_location.stdout }}"
+    section: Service
+    value: "{{ item.value }}"
+  with_dict:
+    LimitNOFILE: "{{ sansible_mosquitto_limits_nofile_hard }}"
+  register: sansible_mosquitto_systemd_conf_file
+  when: ansible_service_mgr == 'systemd'
+
+- name: Ensure Mosquitto SystemD service is updated
+  become: yes
+  systemd:
+    daemon_reload: yes
+  when:
+    - ansible_service_mgr == "systemd"
+    - sansible_mosquitto_systemd_conf_file.changed
+  tags:
+    - skip_ansible_lint
